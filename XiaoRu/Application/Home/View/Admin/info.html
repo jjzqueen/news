@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>『有主机上线』后台管理</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/main.css"/>
+    <script type="text/javascript" src="__PUBLIC__/js/libs/modernizr.min.js"></script>
+</head>
+<body style="">
+<div class="topbar-wrap white">
+    <div class="topbar-inner clearfix">
+        <div class="topbar-logo-wrap clearfix">
+            <h1 class="topbar-logo none"><a href="index.html" class="navbar-brand">后台管理</a></h1>
+            <ul class="navbar-list clearfix">
+                <li><a class="on" href="__CONTROLLER__/index">首页</a></li>
+            </ul>
+        </div>
+        <div class="top-info-wrap">
+            <ul class="top-info-list clearfix">
+                <li><a href="javascript:void(0)">你好，&nbsp;<?php echo session('uname');?></a></li>
+                <li><a href="__CONTROLLER__/pwd_update">修改密码</a></li>
+                <li><a href="__CONTROLLER__/login_out">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container clearfix">
+    <div class="sidebar-wrap">
+        <div class="sidebar-title">
+            <h1>菜单</h1>
+        </div>
+        <div class="sidebar-content">
+            <ul class="sidebar-list">
+                <li>
+                    <a href="#"><i class="icon-font">&#xe003;</i>客户信息</a>
+                    <ul class="sub-menu">
+                        <li><a href="__CONTROLLER__/user_info"><i class="icon-font">&#xe001;</i>客户信息</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-font">&#xe018;</i>商品信息</a>
+                    <ul class="sub-menu">
+                        <li><a href="__CONTROLLER__/drink_list"><i class="icon-font">&#xe062;</i>商品列表</a></li>
+                        <li><a href="__CONTROLLER__/brand_list"><i class="icon-font">&#xe006;</i>品牌列表</a></li>
+                        <li><a href="__CONTROLLER__/cate_list"><i class="icon-font">&#xe005;</i>酒水种类</a></li>
+                        <li><a href="__CONTROLLER__/drink_add"><i class="icon-font">&#xe026;</i>商品添加</a></li>
+                        <li><a href="__CONTROLLER__/warning"><i class="icon-font">&#xe024;</i>预警商品</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><i class="icon-font">&#xe008;</i>订单管理</a>
+                    <ul class="sub-menu">
+                        <li><a href="__CONTROLLER__/order_list"><i class="icon-font">&#xe005;</i>订单列表</a></li>
+                        <li><a href="__CONTROLLER__/order_payed"><i class="icon-font">&#xe068;</i>已支付订单</a></li>
+                        <li><a href="__CONTROLLER__/order_add"><i class="icon-font">&#xe026;</i>订单添加</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!--/sidebar-->
+    <div class="main-wrap">
+        <style>
+            .welcome{
+             color: #000000;
+             width: 100%;
+             margin: auto;
+             padding-top: 5%;
+            }
+            .welcome table{
+             width: 90%;
+             margin: 0px auto;
+            }
+            .welcome tr{
+              height: 30px;
+            }
+            th{
+              background-color: #1f6377;
+            }
+            td{
+             text-align: center;
+            }
+        </style>
+        <div class="welcome" style="font-size: 16px;color:black;vertical-align: middle;">
+            <table border="1">
+            <tr bgcolor="#a9a9a9" style="color: white">
+                <td>编号</td>
+                <td>用户昵称</td>
+                <td>性别</td>
+                <td>联系电话</td>
+                <td>联系邮箱</td>
+            </tr>
+                <foreach name="arr" item="v" key="k" >
+            <tr style="color:#000;">
+                 <td>{$k+1}</td>
+                 <td>{$v['nickname']}</td>
+                 <td>
+                  <if condition="($v[u_sex] eq 1) "> 男
+                   <else />女
+                   </if>
+                 </td>
+                <td>{$v['u_phone']}</td>
+                <td>{$v['u_email']}</td>
+
+            </tr>
+           </foreach>
+            </table>
+            <style>
+                #pages a:hover{
+                    background-color:#62c462;
+                }
+            </style>
+            <div id="pages" style="margin: 5px auto;text-align: center;color:red">
+                <?php echo $page;?>
+            </div>
+        </div>
+    </div>
+    <!--/main-->
+</div>
+</body>
+</html>
