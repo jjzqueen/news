@@ -90,4 +90,10 @@ class IndexController extends Controller {
         $this->assign('arr',$arr);
         $this->display('yule');
     }
+
+
+    public function hah()
+    {
+        echo 1111;
+    }
 }
