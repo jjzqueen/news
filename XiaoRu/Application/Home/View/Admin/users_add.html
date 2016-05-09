@@ -82,52 +82,53 @@
                 margin: auto;
                 padding-top: 5%;
             }
-            .welcome table{
-                width: 90%;
-                margin: 0px auto;
-                text-align: center;
+            table{
+                font-size: 20px;
             }
-            .welcome tr{
-                height: 60px;
-            }
-            th{
-                background-color: #1f6377;
-            }
+
 
         </style>
         <div class="welcome" style="font-size: 16px;color:black;vertical-align: middle;">
-        <div style="width: 90%;margin: auto;margin-bottom: 10px">
-            <a href="__CONTROLLER__/first">返回首页</a>&nbsp;&nbsp;&nbsp;
-            <a href="__CONTROLLER__/cates_add">类别添加</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" placeholder="关键字" style="height: 28px"> &nbsp;<input type="button" value="查询" style="background-color: #00CC00;font-size: 16px;color: white;width: 100px;height: 35px">
-           <!-- <input type="search">-->
-        </div>
-            <table border="1">
-                <tr bgcolor="#a9a9a9" style="color: white">
-                    <td>编号</td>
-                    <td>种类名称</td>
-                    <td>操作</td>
-                </tr>
-                <foreach name="cate_list" item="v" key="k" >
-                    <tr style="color:#000;" height="60px">
-                        <td>{$k+1}</td>
-                        <td>{$v['cate_name']}</td>
-                         <td width="300px">
-                             <a href="">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                             <a href="">删除</a>
-                         </td>
-
-                    </tr>
-                </foreach>
-            </table>
-            <style>
-                #pages a:hover{
-                    background-color:#62c462;
-                }
-            </style>
-            <div id="pages" style="margin: 5px auto;text-align: center;color:red">
-                <?php echo $page;?>
+            <div style="width: 90%;margin: auto;margin-bottom: 10px">
+                <a href="__CONTROLLER__/first">返回首页</a>&nbsp;&nbsp;&nbsp;
+                <a href="__CONTROLLER__/cate_list">返回列表</a>
             </div>
+            <div style="width: 90%;margin: auto;text-align: center">
+                <form action="__CONTROLLER__/users_add" method="post">
+                    <table style="width: 100%">
+                        <tr height="60px">
+                            <td width="45%" align="right">用户名:</td>
+                            <td align="left">&nbsp;&nbsp;<input type="text" required name="admin_name" style="width: 200px;height: 30px"></td>
+                        </tr>
+                        <tr height="60px">
+                            <td width="45%" align="right">设置密码:</td>
+                            <td align="left">&nbsp;&nbsp;<input type="password" required name="admin_pwd" style="width: 200px;height: 30px"></td>
+                        </tr>
+                        <tr height="60px">
+                            <td width="45%" align="right">电话:</td>
+                            <td align="left">&nbsp;&nbsp;<input type="text" required name="admin_phone" style="width: 200px;height: 30px"></td>
+                        </tr>
+                        <tr height="60px">
+                            <td width="45%" align="right">用户名角色:</td>
+                            <td align="left">&nbsp;&nbsp;
+                                <select name="poster" required style="width: 200px;height: 35px;text-align: center">
+                                    <option value="">--设置角色--</option>
+                                    <option value="0">管理员</option>
+                                    <option value="1">记者</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr height="60px">
+                            <td colspan="2">
+                                <input type="submit" value="添 加" style="width: 100px;height: 35px;font-size: 18px">&nbsp;&nbsp;&nbsp;&nbsp;
+                                <input type="reset" value="取 消" style="width: 100px;height: 35px;font-size: 18px">
+                            </td>
+                        </tr>
+                    </table>
+
+                </form>
+            </div>
+
         </div>
     </div>
     <!--/main-->

@@ -8,7 +8,6 @@
     <script type="text/javascript" src="__PUBLIC__/js/libs/modernizr.min.js"></script>
 </head>
 <body style="">
-
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
@@ -80,54 +79,25 @@
                 color: #000000;
                 width: 100%;
                 margin: auto;
-                padding-top: 5%;
+                padding-top: 3%;
+               padding-left: 3%;
             }
-            .welcome table{
-                width: 90%;
-                margin: 0px auto;
-                text-align: center;
-            }
-            .welcome tr{
-                height: 60px;
-            }
-            th{
-                background-color: #1f6377;
-            }
+
 
         </style>
         <div class="welcome" style="font-size: 16px;color:black;vertical-align: middle;">
-        <div style="width: 90%;margin: auto;margin-bottom: 10px">
+        <div style="margin-bottom: 5px;width: 90%;text-align: left;">
             <a href="__CONTROLLER__/first">返回首页</a>&nbsp;&nbsp;&nbsp;
-            <a href="__CONTROLLER__/cates_add">类别添加</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" placeholder="关键字" style="height: 28px"> &nbsp;<input type="button" value="查询" style="background-color: #00CC00;font-size: 16px;color: white;width: 100px;height: 35px">
-           <!-- <input type="search">-->
-        </div>
-            <table border="1">
-                <tr bgcolor="#a9a9a9" style="color: white">
-                    <td>编号</td>
-                    <td>种类名称</td>
-                    <td>操作</td>
-                </tr>
-                <foreach name="cate_list" item="v" key="k" >
-                    <tr style="color:#000;" height="60px">
-                        <td>{$k+1}</td>
-                        <td>{$v['cate_name']}</td>
-                         <td width="300px">
-                             <a href="">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                             <a href="">删除</a>
-                         </td>
+        <a href="__CONTROLLER__/news_list" >返回列表</a> </div>
+        <div style="width: 90%;">
+           <h1 style="text-align: center">{$detail.title}</h1>
+           <h6 style="font-weight: normal;text-align: center">{$detail.add_date}&nbsp;&nbsp;&nbsp;作者:{$detail.admin_name}&nbsp;&nbsp;&nbsp;&nbsp;{$detail.cate_name}</h6>
+            <hr style=>
+            <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            {$detail.content}
+            </p>
 
-                    </tr>
-                </foreach>
-            </table>
-            <style>
-                #pages a:hover{
-                    background-color:#62c462;
-                }
-            </style>
-            <div id="pages" style="margin: 5px auto;text-align: center;color:red">
-                <?php echo $page;?>
-            </div>
+        </div>
         </div>
     </div>
     <!--/main-->

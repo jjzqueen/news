@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>『前情』后台管理</title>
-    <link href="/XiaoRu/Public/css/admin_login.css" rel="stylesheet" type="text/css" />
+    <link href="/news/XiaoRu/Public/css/admin_login.css" rel="stylesheet" type="text/css" />
 </head>
-<body style="background: #00FF00 url(/XiaoRu/Public/images/bg.jpg) no-repeat;">
+<body style="background: #00FF00 url(/news/XiaoRu/Public/images/bg.jpg) no-repeat;">
 
 
 <div class="admin_login_wrap" style="width: 30%">
     <h1 style="color: white;font-size: 38px;vertical-align: middle;margin-bottom: 50px" align="center">前情新闻后台管理</h1>
     <div class="adming_login_border">
         <div class="admin_input">
-            <form action="/XiaoRu/index.php/Home/Admin/login_pro" method="post" >
+            <form action="/news/XiaoRu/index.php/Home/Admin/login_pro" method="post" >
                 <ul class="admin_items">
                     <li>
                         <label for="user">用户名：</label>
@@ -36,7 +36,7 @@
 </div>
 </body>
 </html>
-<script src="/XiaoRu/Public/js/jquery.js"></script>
+<script src="/news/XiaoRu/Public/js/jquery.js"></script>
 <script type="text/javascript">
     function check(form) {
 

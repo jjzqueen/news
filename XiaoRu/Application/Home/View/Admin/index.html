@@ -18,9 +18,12 @@
         </div>
         <div class="top-info-wrap">
             <ul class="top-info-list clearfix">
-                <li><a href="javascript:void(0)">你好，&nbsp;<?php echo session('uname');?></a></li>
-
-                <li><a href="__CONTROLLER__/index">退出</a></li>
+                <li><a href="javascript:void(0)">你好，&nbsp;<?php echo session('admin_name');?>
+                <if condition="session('poster') eq 0 ">管理员
+                    <else/>记者
+                </if>
+                </a></li>
+                <li><a href="__CONTROLLER__/login_out">退出</a></li>
             </ul>
         </div>
     </div>
@@ -32,6 +35,7 @@
         </div>
         <div class="sidebar-content">
             <ul class="sidebar-list">
+                <if condition="session('poster') eq 0 ">
                 <li>
                     <a href="#"><i class="icon-font">&#xe003;</i>新闻管理</a>
                     <ul class="sub-menu">
@@ -46,12 +50,24 @@
                     <a href="#"><i class="icon-font">&#xe018;</i>用户权限管理</a>
                     <ul class="sub-menu">
                         <li><a href="__CONTROLLER__/users_list"><i class="icon-font">&#xe062;</i>用户列表</a></li>
-                        <li><a href="__CONTROLLER__/role_list"><i class="icon-font">&#xe062;</i>角色列表</a></li>
+                        <li><a href="__CONTROLLER__/users_add"><i class="icon-font">&#xe062;</i>用户添加</a></li>
 
 
                     </ul>
                 </li>
+                <else/>
+                    <li>
+                        <a href="#"><i class="icon-font">&#xe003;</i>新闻管理</a>
+                        <ul class="sub-menu">
+                            <li><a href="__CONTROLLER__/news_list"><i class="icon-font">&#xe001;</i>新闻列表</a></li>
+                            <li><a href="__CONTROLLER__/cate_list"><i class="icon-font">&#xe001;</i>新闻类别</a></li>
+                            <li><a href="__CONTROLLER__/counts"><i class="icon-font">&#xe001;</i>榜单统计</a></li>
+                            <li><a href="__CONTROLLER__/orders"><i class="icon-font">&#xe001;</i>订阅推送</a></li>
 
+                        </ul>
+                    </li>
+
+                </if>
             </ul>
         </div>
     </div>

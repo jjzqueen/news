@@ -8,7 +8,6 @@
     <script type="text/javascript" src="__PUBLIC__/js/libs/modernizr.min.js"></script>
 </head>
 <body style="">
-
 <div class="topbar-wrap white">
     <div class="topbar-inner clearfix">
         <div class="topbar-logo-wrap clearfix">
@@ -96,26 +95,49 @@
 
         </style>
         <div class="welcome" style="font-size: 16px;color:black;vertical-align: middle;">
-        <div style="width: 90%;margin: auto;margin-bottom: 10px">
-            <a href="__CONTROLLER__/first">返回首页</a>&nbsp;&nbsp;&nbsp;
-            <a href="__CONTROLLER__/cates_add">类别添加</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" placeholder="关键字" style="height: 28px"> &nbsp;<input type="button" value="查询" style="background-color: #00CC00;font-size: 16px;color: white;width: 100px;height: 35px">
-           <!-- <input type="search">-->
-        </div>
+            <div style="width: 90%;margin: auto;margin-bottom: 10px">
+                <a href="__CONTROLLER__/first">返回首页</a>&nbsp;&nbsp;&nbsp;
+                <a href="__CONTROLLER__/cates_add">添加新闻</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" placeholder="关键字" style="height: 28px"> &nbsp;<input type="button" value="查询" style="background-color: #00CC00;font-size: 16px;color: white;width: 100px;height: 35px">
+                <!-- <input type="search">-->
+            </div>
             <table border="1">
                 <tr bgcolor="#a9a9a9" style="color: white">
                     <td>编号</td>
-                    <td>种类名称</td>
+                    <td>新闻标题</td>
+                    <td>新闻内容</td>
+                    <td>发布时间</td>
+                    <td width="80px">作者</td>
+                    <td width="100px">新闻类别</td>
                     <td>操作</td>
                 </tr>
-                <foreach name="cate_list" item="v" key="k" >
+                <foreach name="news_list" item="v" key="k" >
                     <tr style="color:#000;" height="60px">
                         <td>{$k+1}</td>
+                        <td align="left">
+                        <a href="__CONTROLLER__/news_details?news_id={$v['id']}">
+                           <?php
+                            if(strlen($v['title']<=21)){
+                              echo $v['title'];
+                            }else{
+                               echo substr_replace($v['title'],'...',21);
+                            }?>
+                           </a>
+                        </td>
+                        <td>
+                         <?php echo substr_replace($v['content'],'...',99)?>
+                        </td>
+                        <td>{$v['add_date']}</td>
+                        <td>{$v['admin_name']}</td>
                         <td>{$v['cate_name']}</td>
-                         <td width="300px">
-                             <a href="">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                             <a href="">删除</a>
-                         </td>
+
+
+                        <td width="150px">
+                            <a href="">编辑</a>&nbsp;&nbsp;
+                            <a href="">回收站</a>&nbsp;&nbsp;
+                            <a href="">删除</a>
+
+                        </td>
 
                     </tr>
                 </foreach>

@@ -1,6 +1,6 @@
 <?php
 namespace Home\Model;
-use Think\Model;
+    use Think\Model;
 class NewsModel extends Model{
     protected $tableName = 'news_cate';
     //查询分类表中的所有的数据 返回给控制器
