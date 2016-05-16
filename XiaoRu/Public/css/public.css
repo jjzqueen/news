@@ -25,7 +25,7 @@ img{ border:none;}/*去掉图片加超链接后的边框*/
 #header{ height:92px; background:url(../images/topbg.jpg) repeat-x;}
 #header  img{ float:left; margin-top:24px; margin-left:20px;}
 #header  h3{ float:left; font-size:14px; color:#FFFFFF; line-height:92px; margin-left:300px; }
-#header  a{ float:right;color:#FFFFFF;   text-decoration:none;}
+#header  a{ float:right;color:#087eac;   text-decoration:none;}
 
 /*左部样式*/
 #left{

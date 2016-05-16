@@ -91,7 +91,6 @@
             <hr style=>
             <p >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <?php echo ($detail["content"]); ?>
-
             </p>
 
         </div>

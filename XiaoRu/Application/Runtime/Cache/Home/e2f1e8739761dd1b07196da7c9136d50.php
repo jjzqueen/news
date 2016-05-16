@@ -3,8 +3,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>前台首页</title>
-<link rel="stylesheet" type="text/css" href="/XiaoRu/Public/css/index.css">
-<link rel="stylesheet" type="text/css" href="/XiaoRu/Public/css/public.css">
+<link rel="stylesheet" type="text/css" href="/news/XiaoRu/Public/css/index.css">
+<link rel="stylesheet" type="text/css" href="/news/XiaoRu/Public/css/public.css">
 <style>
 #header{ height:92px; background:none;}
 #main  h2{ margin-left:0px; line-height:50px; font-size:20px;}
@@ -16,60 +16,54 @@ a{color:#087eac;}
 
 <body>
 <div id="header">
-<img src="/XiaoRu/Public/images/logo1.png" alt="logo"/>
-<ul>
-    <li><a href="/XiaoRu/index.php/Home/Index/register" style="color:#087eac;">会员注册</a>/</li>
-    <li><a href="/XiaoRu/index.php/Home/Index/login" style="color:#087eac;">登陆</a></li>
+<img src="/news/XiaoRu/Public/images/logo1.png" alt="logo"/>
 
-</ul>
 </div>
 
 <div id="nav">
 <ul>
-    <li ><a href="/XiaoRu/index.php/Home/Index/index"  class="active">首页</a></li>
-    <li><a href="/XiaoRu/index.php/Home/Index/guonei">国内新闻</a></li>
-    <li><a href="/XiaoRu/index.php/Home/Index/guonei">国际新闻</a></li>
-    <li><a href="/XiaoRu/index.php/Home/Index/guonei">军事新闻</a></li>
-    <li><a href="/XiaoRu/index.php/Home/Index/guonei">娱乐新闻</a></li>
+    <li ><a href="/news/XiaoRu/index.php/Home/Index/index" >首页</a></li>
+    <?php if(is_array($nav)): foreach($nav as $key=>$vo): ?><li><a href="/news/XiaoRu/index.php/Home/Index/news_cate?cate_id=<?php echo ($vo['cate_id']); ?>"><?php echo ($vo['cate_name']); ?></a></li><?php endforeach; endif; ?>
 </ul>
 </div>
 <div>
 <div  id="main">
-<h2 align="center">欢迎注册新用户</h2>
+<h2 style="text-align: center">欢迎注册新用户</h2>
 <div class="article">
 
-<form name="login"  action="/XiaoRu/index.php/Home/Index/register_pro" method="post">
+<form name="login"  action="/news/XiaoRu/index.php/Home/Index/register" method="post">
 
-<table border="0"    cellspacing="20" cellpadding="0" align="center">
+<table border="0"   cellspacing="20" cellpadding="0" style="margin: auto;font-size: 18px">
   <tr>
     <td>用户名：</td>
-    <td><input   type="text" name="name" class="txt" width="2"/></td>
+    <td><input   type="text" name="u_name" required class="txt"/></td>
   </tr>
   <tr>
     <td>密码：</td>
-    <td><input  type="password" name="pwd"  class="txt"/></td>
+    <td><input  type="password" name="u_pwd" required class="txt"/></td>
   </tr>
   <tr>
     <td>性别：</td>
     <td>
-    <input   type="radio"  name="sex"  value="男" checked="checked"/>男&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <input   type="radio"  name="sex" value="女" />女</td>
+        &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+        <input   type="radio"  name="u_sex"  value="0" required/>男
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+       <input   type="radio"  name="u_sex" value="1" />女</td>
   </tr>
-
-      <tr>
-    <td>城市：</td>
-    <td>
-    <select name="city"  class="s1">
-    	<option value="1">北京</option>
-        <option value="2">上海</option>
-        <option value="3">南京</option>
-    </select>
-    </td>
-  </tr>
+    <tr>
+        <td>手机号：</td>
+        <td><input  type="text" name="u_phone" required class="txt"/></td>
+    </tr>
+    <tr>
+        <td>邮箱：</td>
+        <td><input  type="text" name="u_email" required class="txt"/></td>
+    </tr>
 
   <tr>
     <td>&nbsp;</td>
-    <td><input  type="submit" value="添 加"  class="sub"/><input  type="reset" value="重 置"  class="res"/></td>
+    <td><input  type="submit" value="添 加"  class="sub"/>
+        &nbsp;&nbsp; &nbsp;&nbsp;
+    <input  type="reset" value="重 置"  class="res"/></td>
   </tr>
 </table>
 
@@ -82,7 +76,7 @@ a{color:#087eac;}
 <div class="blank20"></div>
 
 <div id="footer">
-	<p>版权所有&copy;CXR<br />联系方式：010-82157081&nbsp;&nbsp;010-82157081&nbsp;&nbsp;010-82157081</p>
+	<p>版权所有&copy;CXR<br />联系方式：010-02132323&nbsp;&nbsp;010-82157081&nbsp;&nbsp;010-82157081</p>
 </div>
 
 </body>

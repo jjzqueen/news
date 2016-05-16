@@ -88,14 +88,21 @@
             th{
                 background-color: #1f6377;
             }
-
         </style>
         <div class="welcome" style="font-size: 16px;color:black;vertical-align: middle;">
             <div style="width: 90%;margin: auto;margin-bottom: 10px">
                 <a href="/news/XiaoRu/index.php/Home/Admin/first">返回首页</a>&nbsp;&nbsp;&nbsp;
-                <a href="/news/XiaoRu/index.php/Home/Admin/cates_add">添加新闻</a>
-                &nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" placeholder="关键字" style="height: 28px"> &nbsp;<input type="button" value="查询" style="background-color: #00CC00;font-size: 16px;color: white;width: 100px;height: 35px">
-                <!-- <input type="search">-->
+                <a href="/news/XiaoRu/index.php/Home/Admin/news_add">添加新闻</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;关键字：<input type="text" id="keys" placeholder="关键字" style="height: 28px"> &nbsp;<input type="button" class="search" value="查询" style="background-color: #00CC00;font-size: 16px;color: white;width: 100px;height: 35px">
+                <script src="/news/XiaoRu/Public/js/jquery.js"></script>
+                <script>
+                $(".search").click(function() {
+                alert(123)
+                    
+                })
+
+                </script>
+
             </div>
             <table border="1">
                 <tr bgcolor="#a9a9a9" style="color: white">
@@ -124,9 +131,9 @@
 
 
                         <td width="150px">
-                            <a href="">编辑</a>&nbsp;&nbsp;
-                            <a href="">回收站</a>&nbsp;&nbsp;
-                            <a href="">删除</a>
+                            <a href="/news/XiaoRu/index.php/Home/Admin/edit?id=<?php echo ($v['id']); ?>,news">编辑</a>&nbsp;&nbsp;
+                            <a href="/news/XiaoRu/index.php/Home/Admin/reback?id=<?php echo ($v['id']); ?>">回收站</a>&nbsp;&nbsp;
+                            <a href="/news/XiaoRu/index.php/Home/Admin/deleted?id=<?php echo ($v['id']); ?>,news">删除</a>
 
                         </td>
 

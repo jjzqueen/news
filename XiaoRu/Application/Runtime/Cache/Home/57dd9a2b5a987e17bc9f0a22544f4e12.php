@@ -108,8 +108,8 @@
                         <td><?php echo ($k+1); ?></td>
                         <td><?php echo ($v['cate_name']); ?></td>
                          <td width="300px">
-                             <a href="">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                             <a href="">删除</a>
+                           <a href="/news/XiaoRu/index.php/Home/Admin/edit?id=<?php echo ($v['cate_id']); ?>,cates">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                           <a href="/news/XiaoRu/index.php/Home/Admin/deleted?id=<?php echo ($v['cate_id']); ?>,cates">删除</a>
                          </td>
 
                     </tr><?php endforeach; endif; ?>

@@ -2,98 +2,251 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+   /*
+    * 前台首页
+    * @author 周晶晶
+    * */
     public function index(){
-      /*
-       * 登录界面
-       * */
-        $model = D("News");
-        $arr = $model->sel();
-        $new = $model->news();
-    //print_r($new);die;
-        //发送数据到视图
+
+        $model_new = D("News");
+        $model_admin = D("Admin");
+        $model_index = D("Index");
+        $arr = $model_new->sel();
+        $new = $model_new->news();
+        $nav = $model_admin->cate_list();
+        $nav = $nav[1];
+        $images = $model_index->images();
+        $this->assign('imgs',$images);
         $this->assign('arr',$arr);
         $this->assign('news',$new);
+        $this->assign('nav',$nav);
         //显示页面
         $this->display('index');
 
     }
+
+      /*
+       * 登录页面
+       * @author 周晶晶
+       * */
     public function login(){
+        $model_admin = D("Admin");
+        $nav = $model_admin->cate_list();
+        $nav = $nav[1];
+        $this->assign('nav',$nav);
         $this->display();
     }
+
+
     /*
      * 验证登录
+     * @author 周晶晶
      * */
      public  function  login_pro(){
-      $this->show('4165456');
+         $model = D("User");
+         $info = $model->only();
+         if($info){
+             $this->success('登录成功',__CONTROLLER__.'/index');
+         }else{
+             $this->error('登录失败');
+         }
+
      }
+    /**
+     * 退出登录
+     * */
+    public function login_out(){
+        session('[destroy]');
+        $this->success('退出成功', __CONTROLLER__.'/login');
+    }
 
    /*
     * register注册
+    * @author 周晶晶
     * */
    public  function  register(){
+       if($_POST){
+         $model = D("User");
+         $info = $model->register();
+         if($info){
+           $this->success('注册成功',__CONTROLLER__.'/index');
+         }else{
+           $this->error('注册失败');
+         }
 
-       $this->display();
+       }else{
+           $model_admin = D("Admin");
+           $nav = $model_admin->cate_list();
+           $nav = $nav[1];
+           $this->assign('nav',$nav);
+           $this->display();
+       }
+
+
    }
-
-    public  function  register_pro(){
-     $model =D("User");
-     $info = $model->register();
-     //print_r($info);
-     if($info){
-       return $this->index();
-     }else{
-       echo "<script>alert('注册失败')</script>";
-     }
-    }
 
     /*
      * 新闻详情页
+     * @author 周晶晶
      * */
     public  function  detail(){
-      $id = $_GET['news_id'];
+        $model_admin = D("Admin");
+        $nav = $model_admin->cate_list();
+        $nav = $nav[1];
+        $this->assign('nav',$nav);
         $model = D("News");
         $arr = $model->detail();
         $this->assign('arr',$arr);
-        //显示页面
         $this->display('detail');
     }
    /*
-    * 国内新闻
+    * 更多 more_news
+    * @author  周晶晶
     * */
-    public function guonei()
-    {
+    public function more_news(){
         $model = D("News");
-        $arr = $model->guonei();
-        $this->assign('arr',$arr);
-        $this->display('guonei');
+        $model_admin = D("Admin");
+        $nav = $model_admin->cate_list();
+        $nav = $nav[1];
+        $arr = $model->more_news();
+        $page = $arr[0];
+        $data = $arr[1];
+        $this->assign('page',$page);
+        $this->assign('news_more',$data);
+        $this->assign('nav',$nav);
+        $this->display('mores');
     }
 
-    public function guoji()
-    {
-        $model = D("News");
-        $arr = $model->guoji();
+    /*
+     * 分类新闻 news_cate
+     * @author 周晶晶
+     * */
+    public function news_cate(){
+        $model =D("News");
+        $model_admin = D("Admin");
+        $nav = $model_admin->cate_list();
+        $nav = $nav[1];
+        $arr = $model->news_cate();
+        $this->assign('nav',$nav);
         $this->assign('arr',$arr);
-        $this->display('guoji');
-    }
-    public function junshi()
-    {
-        $model = D("News");
-        $arr = $model->junshi();
-        $this->assign('arr',$arr);
-        $this->display('junshi');
+        $this->display("news_cate");
+
     }
 
-    public function yule()
-    {
+   /*
+    * 订阅 orders
+    * @author 周晶晶
+    * */
+    public function orders(){
+        if(session('u_name')){
+            $model_news = D("News");
+            $model_admin = D("Admin");
+            $nav = $model_admin->cate_list();
+            $nav = $nav[1];
+            $arr = $model_news->orders();
+
+            $this->assign('nav',$nav);
+            $this->assign('arr',$arr);
+            $this->display('orders');
+        }else{
+           redirect(__CONTROLLER__.'/index');
+        }
+    }
+    /*
+    * 添加订阅 orders_add
+    * @author 周晶晶
+    * */
+    public function orders_add(){
+        $model_news = D("News");
+        $info = $model_news->orders_add();
+        if($info){
+          $this->success("订阅成功",__CONTROLLER__."/orders");
+        }else{
+         $this->error("订阅失败");
+        }
+    }
+    /*
+     * 取消订阅 orders_reset
+     * */
+    public function orders_reset(){
+        $model_news = D("News");
+        $info = $model_news->orders_reset();
+        if($info){
+            $this->success("取消订阅成功",__CONTROLLER__."/orders");
+        }else{
+            $this->error("订阅失败");
+        }
+    }
+    /*
+     * 评论页面
+     * */
+     public function comment(){
+         $news_id = $_GET['news_id'];
+         $model_admin = D("Admin");
+         $nav = $model_admin->cate_list();
+         $nav = $nav[1];
+         $this->assign('nav',$nav);
+         $model = D("News");
+         $arr = $model->detail();
+         $data = $model->comment();
+         $com = $data[0];
+         $replays = $data[1];
+
+         $this->assign('news_id',$news_id);
+         $this->assign('arr',$arr);
+         $this->assign('com',$com);
+         $this->assign('replays',$replays);
+         $this->display('comment');
+     }
+
+     /*
+      * 添加评论 comment_add
+      * */
+    public function comment_add(){
+      $model = D("News");
+      $arr = $model->comment_add();
+      $info = $arr[0];
+      $news_id = $arr[1];
+      if($info){
+         $this->success('评论成功',__CONTROLLER__.'/comment?news_id='.$news_id);
+      }else{
+         $this->error("评论失败");
+      }
+    }
+
+    /*
+     * 回复 repaly
+     * */
+    public function repaly(){
         $model = D("News");
-        $arr = $model->yule();
-        $this->assign('arr',$arr);
-        $this->display('yule');
+        $arr = $model->repaly();
+        $news_id = $_GET['news_id'];
+        if($arr){
+            $this->success('回复成功',__CONTROLLER__.'/comment?news_id='.$news_id);
+        }else{
+            $this->error("回复失败");
+        }
+    }
+    /*
+     * 收藏 collect
+     * */
+    public function collect(){
+      if(session('u_name')){
+          $news_id = $_GET['news_id'];
+          $model = D("News");
+          $info = $model->collect();
+          if($info){
+              $this->success('收藏成功',__CONTROLLER__.'/detail?news_id='.$news_id);
+          }else{
+              $this->error("收藏失败");
+          }
+
+      }else{
+        $this->success('请登录',__CONTROLLER__.'/login');
+      }
+
+
     }
 
 
-    public function hah()
-    {
-        echo 1111;
-    }
 }

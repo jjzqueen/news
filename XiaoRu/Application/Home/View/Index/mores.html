@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>前台首页</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/index.css">
+</head>
+
+<body>
+<div id="header">
+    <img src="__PUBLIC__/images/logo1.png" alt="logo"/>
+    <if condition="session('u_name') neq '' ">
+        <ul>
+            <li><a href="">你好，<?php echo session('u_name');?></a></li>
+            <li><a href="__CONTROLLER__/orders">我的订阅</a></li>
+            <li><a href="__CONTROLLER__/login_out">退出</a></li>
+        </ul>
+
+        <else/>
+        <ul>
+            <li><a href="__CONTROLLER__/register">会员注册</a>/</li>
+            <li><a href="__CONTROLLER__/login">登陆</a></li>
+        </ul>
+    </if>
+</div>
+
+<div id="nav">
+    <ul>
+        <li ><a href="__CONTROLLER__/index" >首页</a></li>
+        <foreach name="nav" item="vo" >
+            <li><a href="__CONTROLLER__/news_cate?cate_id={$vo['cate_id']}">{$vo['cate_name']}</a></li>
+        </foreach>
+
+    </ul>
+</div>
+
+<div class="blank20"></div>
+
+<div id="main1">
+
+<div class="news">
+    <div class="title"><h3>今日新闻</h3></div>
+    <ul style="width: 100%">
+        <foreach name="news_more" item="v" >
+
+            <li style="width: 88%;text-align: left"><span>{$v.add_date}</span>  <a  href="__CONTROLLER__/detail?news_id={$v.id}" style="font-size: 16px;text-align: left;width: 60%">{$v.title}</a></li>
+
+
+        </foreach>
+
+    </ul>
+    <style>
+        #pages a:hover{
+            background-color:#62c462;
+        }
+    </style>
+    <div id="pages" style="margin: 5px auto;text-align: center;color:red">
+        <?php echo $page;?>
+    </div>
+
+</div>
+
+
+
+<div id="footer">
+    <p>版权所有&copy;CXR<br />联系方式：010-82157081&nbsp;&nbsp;010-82157081&nbsp;&nbsp;010-82157081</p>
+</div>
+
+</body>
+</html>

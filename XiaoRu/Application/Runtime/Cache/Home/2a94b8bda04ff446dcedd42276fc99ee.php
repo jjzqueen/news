@@ -9,41 +9,43 @@
 <body>
 <div id="header">
 <img src="/news/XiaoRu/Public/images/logo1.png" alt="logo"/>
+<?php if(session('u_name') != '' ): ?><ul>
+        <li><a href="">你好，<?php echo session('u_name');?></a></li>
+        <li><a href="/news/XiaoRu/index.php/Home/Index/orders">我的订阅</a></li>
+        <li><a href="/news/XiaoRu/index.php/Home/Index/login_out">退出</a></li>
+    </ul>
+
+<?php else: ?>
 <ul>
-	<li><a href="/news/XiaoRu/index.php/Home/Index/register">会员注册</a>/</li>
+	<li><a href="/news/XiaoRu/index.php/Home/Index/register">注册</a>/</li>
     <li><a href="/news/XiaoRu/index.php/Home/Index/login">登陆</a></li>
-</ul>
+</ul><?php endif; ?>
 </div>
 
 <div id="nav">
 <ul>
-	<li ><a href="/news/XiaoRu/index.php/Home/Index/index"  class="active">首页</a></li>
-    <li><a href="/news/XiaoRu/index.php/Home/Index/guonei">国内新闻</a></li>
-    <li><a href="/news/XiaoRu/index.php/Home/Index/guonei">国际新闻</a></li>
-    <li><a href="/news/XiaoRu/index.php/Home/Index/guonei">军事新闻</a></li>
-    <li><a href="/news/XiaoRu/index.php/Home/Index/guonei">娱乐新闻</a></li>
+	<li ><a href="/news/XiaoRu/index.php/Home/Index/index" >首页</a></li>
+    <?php if(is_array($nav)): foreach($nav as $key=>$vo): ?><li><a href="/news/XiaoRu/index.php/Home/Index/news_cate?cate_id=<?php echo ($vo['cate_id']); ?>"><?php echo ($vo['cate_name']); ?></a></li><?php endforeach; endif; ?>
+
 </ul>
 </div>
 
 <div class="blank20"></div>
 
 <div id="main1">
-	<div class="title"><h3>图片新闻</h3><a href="#">更多&gt;&gt;</a></div>
+	<div class="title"><h3>今日图片新闻</h3></div>
     <ul>
-    	<li><a href="#"><img src="/news/XiaoRu/Public/images/01.jpg"  height="178" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="/news/XiaoRu/Public/images/02.jpg" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="/news/XiaoRu/Public/images/03.jpg" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="/news/XiaoRu/Public/images/04.jpg" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="/news/XiaoRu/Public/images/06.jpg" /></a><p><a href="#">图片新闻</a></p></li>
+    <?php if(is_array($imgs)): foreach($imgs as $key=>$v): ?><li><a href="/news/XiaoRu/index.php/Home/Index/detail?news_id=<?php echo ($v['id']); ?>"><img src="/news/XiaoRu/Public/<?php echo ($v['img']); ?>"  height="178" /></a><p><a href="/news/XiaoRu/index.php/Home/Index/detail?news_id=<?php echo ($v['id']); ?>"><?php echo ($v['title']); ?></a></p></li><?php endforeach; endif; ?>
+
     </ul>
 </div>
 
 <div class="blank20"></div>
 
 <div class="news">
-	<div class="title"><h3>最新新闻</h3><a href="#">更多&gt;&gt;</a></div>
-    <ul>
-    <?php if(is_array($news)): foreach($news as $key=>$v): ?><li><span><?php echo ($v["addtime"]); ?></span>  <a  href="/news/XiaoRu/index.php/Home/Index/detail?news_id=<?php echo ($v["news_id"]); ?>"><?php echo ($v["news_title"]); ?></a></li><?php endforeach; endif; ?>
+	<div class="title"><h3>最新新闻</h3><a href="/news/XiaoRu/index.php/Home/Index/more_news">更多&gt;&gt;</a></div>
+    <ul style="width: 100%">
+    <?php if(is_array($news)): foreach($news as $key=>$v): ?><li style="width: 88%;text-align: left"><span><?php echo ($v["add_date"]); ?></span>  <a  href="/news/XiaoRu/index.php/Home/Index/detail?news_id=<?php echo ($v["id"]); ?>" style="font-size: 16px;text-align: left;width: 60%"><?php echo ($v["title"]); ?></a></li><?php endforeach; endif; ?>
 
         </ul>
 

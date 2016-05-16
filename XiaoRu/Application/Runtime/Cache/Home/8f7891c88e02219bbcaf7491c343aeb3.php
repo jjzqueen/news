@@ -116,8 +116,8 @@
                             <?php echo ($v['admin_phone']); ?>
                         </td>
                         <td width="300px">
-                            <a href="">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="">删除</a>
+                     <a href="/news/XiaoRu/index.php/Home/Admin/edit?id=<?php echo ($v['admin_id']); ?>,admin">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="/news/XiaoRu/index.php/Home/Admin/deleted?id=<?php echo ($v['admin_id']); ?>,admin">删除</a>
                         </td>
 
                     </tr><?php endforeach; endif; ?>

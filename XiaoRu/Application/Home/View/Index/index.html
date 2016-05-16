@@ -9,43 +9,51 @@
 <body>
 <div id="header">
 <img src="__PUBLIC__/images/logo1.png" alt="logo"/>
+<if condition="session('u_name') neq '' ">
+    <ul>
+        <li><a href="">你好，<?php echo session('u_name');?></a></li>
+        <li><a href="__CONTROLLER__/orders">我的订阅</a></li>
+        <li><a href="__CONTROLLER__/login_out">退出</a></li>
+    </ul>
+
+<else/>
 <ul>
-	<li><a href="__CONTROLLER__/register">会员注册</a>/</li>
+	<li><a href="__CONTROLLER__/register">注册</a>/</li>
     <li><a href="__CONTROLLER__/login">登陆</a></li>
 </ul>
+</if>
 </div>
 
 <div id="nav">
 <ul>
-	<li ><a href="__CONTROLLER__/index"  class="active">首页</a></li>
-    <li><a href="__CONTROLLER__/guonei">国内新闻</a></li>
-    <li><a href="__CONTROLLER__/guonei">国际新闻</a></li>
-    <li><a href="__CONTROLLER__/guonei">军事新闻</a></li>
-    <li><a href="__CONTROLLER__/guonei">娱乐新闻</a></li>
+	<li ><a href="__CONTROLLER__/index" >首页</a></li>
+    <foreach name="nav" item="vo" >
+        <li><a href="__CONTROLLER__/news_cate?cate_id={$vo['cate_id']}">{$vo['cate_name']}</a></li>
+    </foreach>
+
 </ul>
 </div>
 
 <div class="blank20"></div>
 
 <div id="main1">
-	<div class="title"><h3>图片新闻</h3><a href="#">更多&gt;&gt;</a></div>
+	<div class="title"><h3>今日图片新闻</h3></div>
     <ul>
-    	<li><a href="#"><img src="__PUBLIC__/images/01.jpg"  height="178" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="__PUBLIC__/images/02.jpg" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="__PUBLIC__/images/03.jpg" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="__PUBLIC__/images/04.jpg" /></a><p><a href="#">图片新闻</a></p></li>
-        <li><a href="#"><img src="__PUBLIC__/images/06.jpg" /></a><p><a href="#">图片新闻</a></p></li>
+    <foreach name="imgs" item="v">
+        <li><a href="__CONTROLLER__/detail?news_id={$v['id']}"><img src="__PUBLIC__/{$v['img']}"  height="178" /></a><p><a href="__CONTROLLER__/detail?news_id={$v['id']}">{$v['title']}</a></p></li>
+    </foreach>
+
     </ul>
 </div>
 
 <div class="blank20"></div>
 
 <div class="news">
-	<div class="title"><h3>最新新闻</h3><a href="#">更多&gt;&gt;</a></div>
-    <ul>
+	<div class="title"><h3>最新新闻</h3><a href="__CONTROLLER__/more_news">更多&gt;&gt;</a></div>
+    <ul style="width: 100%">
     <foreach name="news" item="v" >
 
-        <li><span>{$v.addtime}</span>  <a  href="__CONTROLLER__/detail?news_id={$v.news_id}">{$v.news_title}</a></li>
+        <li style="width: 88%;text-align: left"><span>{$v.add_date}</span>  <a  href="__CONTROLLER__/detail?news_id={$v.id}" style="font-size: 16px;text-align: left;width: 60%">{$v.title}</a></li>
 
 
     </foreach>

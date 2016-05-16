@@ -87,7 +87,7 @@
         <div class="welcome" style="font-size: 16px;color:black;vertical-align: middle;">
             <div style="width: 90%;margin: auto;margin-bottom: 10px">
                 <a href="/news/XiaoRu/index.php/Home/Admin/first">返回首页</a>&nbsp;&nbsp;&nbsp;
-                <a href="/news/XiaoRu/index.php/Home/Admin/cate_list">返回列表</a>
+                <a href="/news/XiaoRu/index.php/Home/Admin/users_list">返回列表</a>
             </div>
             <div style="width: 90%;margin: auto;text-align: center">
                 <form action="/news/XiaoRu/index.php/Home/Admin/users_add" method="post">

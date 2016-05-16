@@ -1,0 +1,147 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>前台首页</title>
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/index.css">
+
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <style>
+        #header{ height:92px; background:none;}
+        #main  h2{ margin-left:0px; line-height:50px; font-size:20px;}
+        h2{margin-left:50px}
+        p{color: black}
+    </style>
+</head>
+
+<body>
+<div id="header">
+    <img src="__PUBLIC__/images/logo1.png" alt="logo"/>
+
+    <if condition="session('u_name') neq '' ">
+        <ul class="login_user">
+            <li><a href="">你好，<?php echo session('u_name');?></a></li>
+            <li><a href="__CONTROLLER__/orders">我的订阅</a></li>
+            <li><a href="__CONTROLLER__/login_out">退出</a></li>
+        </ul>
+
+        <else/>
+        <ul class="login_user">
+            <li><a href="__CONTROLLER__/register">注册</a>/</li>
+            <li><a href="__CONTROLLER__/login">登陆</a></li>
+        </ul>
+    </if>
+</div>
+
+<div id="nav">
+    <ul>
+        <li ><a href="__CONTROLLER__/index" >首页</a></li>
+        <foreach name="nav" item="vo" >
+            <li><a href="__CONTROLLER__/news_cate?cate_id={$vo['cate_id']}">{$vo['cate_name']}</a></li>
+        </foreach>
+    </ul>
+</div>
+<div>
+    <div   style="margin:auto;text-align: center;padding-top: 50px">
+        <h1 style="color: black;font-size: 16px;margin-bottom: 5px">{$arr.title}</h1>
+        <h6 style="font-weight: normal;color: black;margin-bottom: 10px">
+            {$arr.add_date} &nbsp;&nbsp;&nbsp;  作者：{$arr.admin_name} &nbsp;&nbsp;&nbsp;{$arr.cate_name}
+        </h6>
+        <hr >
+        <div style="margin: auto;text-align: center;">
+            <p style="font-size: 16px;color:black;line-height: 25px"> &nbsp;&nbsp;&nbsp;{$arr.content}</p>
+        </div>
+    </div>
+    <div class="blank20"></div>
+    <div class="blank20"></div>
+
+    <p style="color:#000000;font-size: 16px">评 论:</p>
+    <hr>
+    <div class="comment-info" style="padding-left: 0px;">
+        <foreach name="com" item="v">
+         <if condition="$v['p_id'] eq 0">
+        <b><a href="#" target="_blank" style="color: #000000">
+        {$v['u_name']}:
+        </a> </b>
+        <div class="comment-content" style="color:#087eac">&nbsp;&nbsp;&nbsp;&nbsp;{$v['c_content']}</div>
+        <div style="margin:auto;padding-left: 10px;margin-bottom: 20px">
+        <span class="comment-time" style="float: left;padding-left: 0px;color:#087eac"><?php echo date('Y年m月d日 H:i:s',$v['c_time']);?></span>
+      <a href="javascript:void(0)" style="float: right;margin-right: 50px" class="button_replay" amtr="{$v['c_id']}" >回复</a></div>
+      <br>
+    <div id="replay-{$v['c_id']}" class="replay_div" style="display: none">
+        <form action="__CONTROLLER__/repaly?news_id={$news_id}" method="post">
+            <textarea  name="c_content" id="textarea1" pattern="/[^\u4e00-\u9fa5]/"  cols="50" rows="5" required></textarea><br><br>
+        <input type="hidden" name="p_id" id="p_id" value="{$v.c_id}" size="22" tabindex="1"/>
+        <input type="submit" value="发表回复" />
+        <input type="reset"   value="取消回复" />
+        </form>
+        </div>
+         </if>
+        <br>
+          <if condition="$replays eq ''">
+          <else/>
+          <div style="padding-left: 30px;margin-bottom: 20px">
+             <foreach name="replays" item="vo">
+                <if condition="$vo['p_id'] eq $v['c_id']">
+                 <b><a href="#" target="_blank" style="color: #000000">
+                      {$vo['u_name']}&nbsp;回复&nbsp;{$v['u_name']}:
+                 </a> </b>
+                 <div class="comment-content" style="color:#087eac">&nbsp;&nbsp;&nbsp;&nbsp;{$vo['c_content']}</div>
+                 <div style="margin:auto;padding-left: 10px;margin-bottom: 20px">
+                     <span class="comment-time" style="float: left;padding-left: 0px;color:#087eac"><?php echo date('Y年m月d日 H:i:s',$vo['c_time']);?></span>
+                     <a href="javascript:void(0)" style="float: right;margin-right: 50px" class="button_replay" amtr="{$vo['c_id']}" >回复</a></div>
+                 <br>
+                 <div id="replay-{$vo['c_id']}" class="replay_div" style="display: none">
+                     <form action="__CONTROLLER__/repaly?news_id={$news_id}" method="post">
+                         <textarea  name="c_content" id="textarea11" pattern="/[^\u4e00-\u9fa5]/"  cols="50" rows="5" required></textarea><br><br>
+                         <input type="hidden" name="p_id"  value="{$vo.c_id}" size="22" tabindex="1"/>
+                         <input type="submit" value="发表回复" />
+                         <input type="reset"   value="取消回复" />
+                     </form>
+                 </div>
+
+                </if>
+
+             </foreach>
+          </div>
+          </if>
+
+        </foreach>
+
+    </div>
+    <script>
+        $(function(){
+           $(".button_replay").click(function(){
+               var a = $(this).attr('amtr');
+               $(".replay_div").css('display','none');
+               $("#replay-"+a).css('display','block');
+               $(".button_replay").css('display','block');
+               $(this).hide();
+               $(".words").css('display','none');
+           });
+           $(":reset").click(function(){
+               //window.location.reload();
+               $(".replay_div").css('display','none');
+               $(".button_replay").css('display','block');
+               $(".words").css('display','block');
+           })
+        })
+    </script>
+    <div  class="words" style="margin:auto;padding-left: 0px;">
+        <br>
+        <form action="__CONTROLLER__/comment_add?news_id={$news_id}" method="post">
+            <div id="tra" style="color: black" >
+            <textarea  name="c_content" id="textarea" pattern="/[^\u4e00-\u9fa5]/"  cols="50" rows="5" required></textarea>评论内容(必填)<br /><br />
+
+            <input type="submit" value="发表评论" />
+            </div>
+            </form>
+    </div>
+    <div class="blank20"></div>
+    <div id="footer">
+        <p>版权所有&copy;八维研修学院<br />联系方式：010-82157081&nbsp;&nbsp;010-82157081&nbsp;&nbsp;010-82157081</p>
+    </div>
+</div>
+</body>
+</html>
+
